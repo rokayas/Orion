@@ -1,4 +1,4 @@
-function Intensity_Calc() {
+function Intensity_Calc() { //Developed by Rokayas of ATL
     Orion.Print('Target the monster/pet you wish to appraise');
     Orion.WaitForAddObject('selectedTarget', 5000);
     var selectedTarget = Orion.FindObject('selectedTarget');
