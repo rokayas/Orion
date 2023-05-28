@@ -5,12 +5,15 @@ To calculate the min and max values for an animal, if you wish to add your own y
 A example of the min/max calculation is as follows for a nightmare " https://www.uoguide.com/Nightmare "
 
 Attributes
-Strength	496-525	Hit Points	298-315
-Dexterity	86-125	Stamina	86-105
-Intelligence	86-125	Mana	86-125
+Strength	496-525
+Hit Points	298-315
+Dexterity	86-125
+Stamina	86-105
+Intelligence	86-125
+Mana	86-125
 Resists and Damage
-Types	Physical	Fire	Cold	Poison	Energy
-Resistances	55-65	30-40	30-40	30-40	20-30
+Types	      Physical	      Fire	      Cold	      Poison	      Energy
+Resistances	55-65	          30-40	      30-40	      30-40	        20-30
 
 Min calculation: 496+298+86+86+86+86+55+30+30+30+20 = 1303
 
