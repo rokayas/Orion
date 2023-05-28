@@ -13,6 +13,7 @@ Types	Physical	Fire	Cold	Poison	Energy
 Resistances	55-65	30-40	30-40	30-40	20-30
 
 Min calculation: 496+298+86+86+86+86+55+30+30+30+20 = 1303
+
 Max calculation: 525+315+125+105+125+125+65+40+40+40+20 = 1535
 
 So our new pet entry would look as follows
