@@ -1,36 +1,22 @@
 function Intensity_Calc() {
-    // Prompt user to target a monster/pet
     Orion.Print('Target the monster/pet you wish to appraise');
     Orion.WaitForAddObject('selectedTarget', 5000);
     var selectedTarget = Orion.FindObject('selectedTarget');
-
-    // Check if a target was selected
     if (selectedTarget) {
         Orion.Print('Selected target: ' + selectedTarget.Name());
-
-        // Use Animal Lore skill on selected target
         Orion.UseSkill('Animal Lore');
         Orion.WaitForTarget(1000);
         Orion.TargetObject(selectedTarget.Serial());
-
-        // Wait for the gump with Animal Lore details
         if (Orion.WaitForGump(1000)) {
             var gump = Orion.GetLastGump();
-            // Get all text entries from the gump
             var textEntries = gump.TextList();
-
-            // Function to remove HTML tags from text
             var stripHTML = function(html) {
                 return html.replace(/<[^>]*>?/gm, '');
             };
-
-            // Get max value from string in format 'current/max'
             var getMax = function(str) {
                 var splitStr = str.split('/');
                 return splitStr.length > 1 ? splitStr[1] : splitStr[0];
             };
-
-            // Get attributes from the text entries
             var attributes = {
                 'Hits': isNaN(getMax(stripHTML(textEntries[1]))) ? 0 : parseInt(getMax(stripHTML(textEntries[1]))),
                 'Stamina': isNaN(getMax(stripHTML(textEntries[2]))) ? 0 : parseInt(getMax(stripHTML(textEntries[2]))),
@@ -44,8 +30,6 @@ function Intensity_Calc() {
                 'Poison Resistance': isNaN(stripHTML(textEntries[14]).replace('%','')) ? 0 : parseInt(stripHTML(textEntries[14]).replace('%','')),
                 'Energy Resistance': isNaN(stripHTML(textEntries[15]).replace('%','')) ? 0 : parseInt(stripHTML(textEntries[15]).replace('%','')),
             };
-
-            // Compute the sum of all attribute values
             var sumOfAttributes = 0;
             for (var attribute in attributes) {
                 if (attributes[attribute] != '---') {
@@ -53,20 +37,29 @@ function Intensity_Calc() {
                     sumOfAttributes += attributes[attribute];
                 }
             }
-            Orion.Print('Sum of attributes: ' + sumOfAttributes);
-
-            // Calculate the percentile
+            Orion.Print('Power: ' + sumOfAttributes);
             var minMaxValues = {
                 'a cu sidhe': { min: 3245, max: 3675 },
-                // Add additional targets here
+                'a greater dragon': { min: 3390, max: 5411 },
+                'a dragon': { min: 2523, max: 2735 },
+                'a cold drake': { min: 2048, max: 2299 },
+                'a fire steed': { min: 1546, max: 1710 },
+                'a fire beetle': { min: 1595, max: 1885 },
+                'a giant beetle': { min: 1880, max: 1885 },
+                'a white wyrm': { min: 2358, max: 2611 },
+                'a hiryu': { min: 3020, max: 3735 },
+                'a lesser hiryu': { min: 1570, max: 2185 },
+                'a najasaurus': { min: 1561, max: 2141 },
+                'a nightmare': { min: 1303, max: 1535 },
+                'a rune beetle': { min: 1935, max: 2385 },
+                'a serpentine dragon': { min: 3130, max: 3320 },
+                'a frost mite': { min: 2840, max: 3251 },
             };
             var targetMinMax = minMaxValues[selectedTarget.Name()];
             if (targetMinMax) {
                 var percentile = ((sumOfAttributes - targetMinMax.min) / (targetMinMax.max - targetMinMax.min)) * 100;
                 var percentileText = 'Percentile: ' + percentile.toFixed(2) + '%';
                 Orion.Print(percentileText);
-                
-                // Save the output to a text file
                 var fileObject = Orion.NewFile();
                 if (fileObject.Open('Orion_Intensity_Calc.txt')) {
                     fileObject.WriteLine('Selected target: ' + selectedTarget.Name());
@@ -75,7 +68,7 @@ function Intensity_Calc() {
                             fileObject.WriteLine(attribute + ': ' + attributes[attribute]);
                         }
                     }
-                    fileObject.WriteLine('Sum of attributes: ' + sumOfAttributes);
+                    fileObject.WriteLine('Power: ' + sumOfAttributes);
                     fileObject.Close();
                 } else {
                     Orion.Print('Unable to open file');
@@ -83,7 +76,6 @@ function Intensity_Calc() {
             } else {
                 Orion.Print('Target not found in minMaxValues');
             }
-
         } else {
             Orion.Print('No gump received');
         }
