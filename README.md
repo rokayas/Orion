@@ -33,4 +33,6 @@ Max calculation: 525+315+125+105+125+125+65+40+40+40+20 = 1535
 So our new pet entry would look as follows
 'a nightmare': { min: 1303, max: 1535 },
 
+This was designed for use on OSI so I can't vouch for it working anywhere else.
+
 Happy hunting!
