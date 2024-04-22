@@ -1,6 +1,6 @@
 This script is designed to be used on untamed animals. The script uses a min/max stat calculation to determine the percentile of the analyzed mob. This script does not take into account overcapped skills, it only looks at stats + resists.
 
-Once the calculation is done the details are displayed on screen for a short period of time, as well as posted in your Jorunal in game.
+Once the calculation is done the details are displayed on screen for a short period of time, as well as posted in your Journal in game.
 
 To calculate the min and max values for an animal, if you wish to add your own you need to look up what the minimum and maximum values for whatever animal you're interested in. Once you have the min and max values you can add that to the script in a new line along with the other animals listed. Please note that if the name of the animal you're inspecting is not typed exactly as it appears in game you will get an error.
 
